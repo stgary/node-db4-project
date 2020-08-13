@@ -11,14 +11,15 @@ function getRecipes() {
 }
 
 function getShoppingList(recipe_id) {
-    db('recipes')
+    return (
+     db('recipes')
         .join('quantity', 'quantity.ingredient_id', '=', 'ingredients.id')
         .join('ingredients', 'ingredients.recipe_id', '=', 'recipes.id')
         .select('quantity.amount', 'ingredients.ingredient')
-        .where({ id: recipe_id });
+        .where({ id: recipe_id })
+    );
 }
 
 function getInstructions(recipe_id) {
-    db('steps')
-        .where({ recipe_id: recipe_id });
+    return db('steps').where({ recipe_id: recipe_id });
 }
