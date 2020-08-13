@@ -12,31 +12,13 @@ function getRecipes() {
 
 function getShoppingList(recipe_id) {
     db('recipes')
-        .join('quantity', 'quantity.recipe_id', '=', 'recipes.id')
+        .join('quantity', 'quantity.ingredient_id', '=', 'ingredients.id')
         .join('ingredients', 'ingredients.recipe_id', '=', 'recipes.id')
         .select('quantity.amount', 'ingredients.ingredient')
-        .where({ id: recipe_id })
-            .then(dbRes => {
-                res.status(200).json({ dbRes });
-            })
-            .catch(error => {
-                console.log(error);
-                res.status(500).json({
-                    message: error.message
-                });
-            });
+        .where({ id: recipe_id });
 }
 
 function getInstructions(recipe_id) {
     db('steps')
-        .where({ recipe_id: recipe_id })
-        .then(dbRes => {
-            res.status(200).json({ dbRes });
-        })
-        .catch(error => {
-            console.log(error);
-            res.status(500).json({
-                message: error.message
-            });
-        });
+        .where({ recipe_id: recipe_id });
 }

@@ -1,6 +1,6 @@
 
 exports.seed = function(knex, Promise) {
-  return knex('accounts').truncate()
+  return knex('steps').truncate()
     .then(function () {
     return knex('steps').insert([
       {id: 1, recipe_id: 1, ingredient_id: 1, quantity_id: 2},
