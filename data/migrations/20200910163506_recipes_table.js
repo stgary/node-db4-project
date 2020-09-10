@@ -3,13 +3,14 @@ exports.up = function(knex) {
   return knex.schema
     .createTable('recipes', tbl => {
         tbl.increments();
-        tbl.string('name', 255)
+        tbl.string('recipe', 255)
             .unique()
             .notNullable()
             .index();
     })
     .createTable('ingredients', tbl => {
         tbl.increments();
+        tbl.string('ingredient')
         tbl.float('quantity');
     })
     .createTable('instructions', tbl => {
