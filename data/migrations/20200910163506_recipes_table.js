@@ -11,7 +11,13 @@ exports.up = function(knex) {
     .createTable('ingredients', tbl => {
         tbl.increments();
         tbl.string('ingredient')
-        tbl.float('quantity');
+        tbl.float('quantity')
+        tbl.integer('recipe_id')
+            .unsigned()
+            .notNullable()
+            .references('recipes.id')
+            .onDelete('RESTRICT')
+            .onUpdate('CASCADE');
     })
     .createTable('instructions', tbl => {
         tbl.increments();
@@ -36,7 +42,7 @@ exports.up = function(knex) {
 
 exports.down = function(knex) {
   return knex.schema    
-    .dropTableIfExist('instructions')
-    .dropTableIfExist('ingredients')
-    .dropTableIfExist('recipes')
+    .dropTableIfExists('instructions')
+    .dropTableIfExists('ingredients')
+    .dropTableIfExists('recipes')
 };

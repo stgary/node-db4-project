@@ -5,9 +5,9 @@ module.exports = {
 }
 
 function getRFI(ingredient_id) {
-    db('ingredients')
-        .join('recipes', 'recipes.id', 'ingredients.recipe_id')
-        .select('recipe.recipe')
-        .where({ ingredients_id: ingredients_id });
+    return db('recipes')
+        .join('instructions', 'recipes.id', '=', 'instructions.recipe_id')
+        .select('recipes.recipe')
+        .where({ ingredient_id: ingredient_id });
 }
 
