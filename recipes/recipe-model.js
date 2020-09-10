@@ -7,13 +7,13 @@ module.exports = {
 }
 
 function getRecipes() {
-
+    db('recipes');
 }
 
-function getShippingList() {
-    
+function getShippingList(recipe_id) {
+    db('ingredients').where({ recipe_id: recipe_id });
 }
 
-function getInstructions() {
-    
+function getInstructions(recipe_id) {
+    db('instructions').where({ recipe_id: recipe_id });
 }
